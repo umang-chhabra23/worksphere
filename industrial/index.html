@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worksphere Industrial | Factory & Plant Architecture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared-header.css">
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --accent: #e65c00;
+            --bg-light: #f5f5f5;
+            --text-main: #111;
+            --text-muted: #555;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 6rem 0;
+        }
+
+        .bg-light {
+            background-color: var(--bg-light);
+        }
+
+        .bg-dark {
+            background-color: var(--primary);
+            color: #fff;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero {
+            position: relative;
+            min-height: 90vh;
+            padding: 6rem 0;
+            display: flex;
+            align-items: center;
+            background: url('https://placehold.co/1920x1080/1a1a1a/ffffff?text=+') center/cover;
+            color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 4px;
+            border-left: 4px solid transparent;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-left-color: var(--accent);
+        }
+
+        .card-dark {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 4px;
+        }
+
+        .img-fluid {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .img-cover {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #cc5200;
+        }
+
+        footer {
+            padding: 2rem 0;
+            border-top: 1px solid #eaeaea;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            letter-spacing: -0.5px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(230, 92, 0, 0.1);
+            color: var(--accent);
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="glass-header-container">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="../index.html" class="nav-btn logo-btn" style="text-decoration: none; display: inline-block;">Worksphere</a></li>
+                <li class="nav-separator">|</li>
+                <li><a href="../labs/index.html" class="nav-btn" style="text-decoration: none; display: inline-block;">Labs</a></li>
+                <li><a href="../industrial/index.html" class="nav-btn" style="text-decoration: none; display: inline-block;">Industrial</a></li>
+                <li><a href="../corporate/index.html" class="nav-btn" style="text-decoration: none; display: inline-block;">Corporate</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content fade-in">
+            <span class="pill" style="background: rgba(255,255,255,0.2); color: white;">Worksphere Industrial</span>
+            <h1>From site to structure — industrial architecture built to your timeline</h1>
+            <p>Delivering large-format factory and SEZ projects across India.</p>
+            <a href="#contact" class="btn">Discuss Your Project</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center fade-in">Why Worksphere for Industrial</h2>
+            <div class="grid-4 fade-in">
+                <div class="card">
+                    <h3>40+ Years Experience</h3>
+                    <p>Led by Chandermohan Mehra's deep expertise in industrial scale delivery.</p>
+                </div>
+                <div class="card">
+                    <h3>PAN India Reach</h3>
+                    <p>Proven track record of delivering manufacturing plants across diverse states.</p>
+                </div>
+                <div class="card">
+                    <h3>Workflow Synergy</h3>
+                    <p>Architecture that complements and enhances complex production workflows.</p>
+                </div>
+                <div class="card">
+                    <h3>Statutory Approvals</h3>
+                    <p>End-to-end management of Factory Act, fire NOC, and environmental clearances.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-light">
+        <div class="container grid-2 fade-in">
+            <div>
+                <h2>Building Architecture</h2>
+                <p>Comprehensive site master planning, heavy-duty structural design, and large-scale utility
+                    integrations for factory campuses and SEZs.</p>
+            </div>
+            <div>
+                <img src="https://placehold.co/600x400/e0e0e0/333?text=Site+Master+Planning" class="img-fluid">
+            </div>
+        </div>
+        <div class="container grid-2 fade-in" style="margin-top: 4rem;">
+            <div>
+                <img src="https://placehold.co/600x400/e0e0e0/333?text=Admin+%26+Office+Block" class="img-fluid">
+            </div>
+            <div>
+                <h2>Admin & Office Interiors</h2>
+                <p>Creating functional, durable, and representative office blocks and administrative facilities within
+                    the industrial complex.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container fade-in">
+            <h2 class="text-center">Industrial Portfolio</h2>
+            <div class="grid-3" style="margin-top: 2rem;">
+                <div class="card" style="padding:0; overflow:hidden;">
+                    <img src="https://placehold.co/400x300/e0e0e0/333?text=Auto+Component+Plant" class="img-cover">
+                    <div style="padding: 1.5rem;">
+                        <h3>Auto Component Plant</h3>
+                        <p class="text-muted">Chakan, Pune</p>
+                    </div>
+                </div>
+                <div class="card" style="padding:0; overflow:hidden;">
+                    <img src="https://placehold.co/400x300/e0e0e0/333?text=FMCG+Warehouse" class="img-cover">
+                    <div style="padding: 1.5rem;">
+                        <h3>FMCG Mega Warehouse</h3>
+                        <p class="text-muted">Bhiwandi, Maharashtra</p>
+                    </div>
+                </div>
+                <div class="card" style="padding:0; overflow:hidden;">
+                    <img src="https://placehold.co/400x300/e0e0e0/333?text=Chemical+SEZ" class="img-cover">
+                    <div style="padding: 1.5rem;">
+                        <h3>Chemical SEZ Unit</h3>
+                        <p class="text-muted">Dahej, Gujarat</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-dark">
+        <div class="container fade-in">
+            <h2>Industrial Case Studies</h2>
+            <div class="grid-2">
+                <div class="card-dark">
+                    <span class="pill">Auto Sector</span>
+                    <h3>Precision Motors Facility</h3>
+                    <p><strong>Scale:</strong> 250,000 sq ft • Pune<br>
+                        <strong>Challenge:</strong> Complex heavy machinery foundations and vibration control.<br>
+                        <strong>Timeline:</strong> Delivered 3 weeks ahead of schedule with all NOCs.
+                    </p>
+                </div>
+                <div class="card-dark">
+                    <span class="pill">FMCG Sector</span>
+                    <h3>Global Foods Plant</h3>
+                    <p><strong>Scale:</strong> 400,000 sq ft • Sanand<br>
+                        <strong>Challenge:</strong> Strict hygiene zoning and massive water utility requirements.<br>
+                        <strong>Outcome:</strong> Achieved IGBC Gold rating while meeting exact production specs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container grid-2 fade-in">
+            <div>
+                <h2>Our Industrial Services</h2>
+                <ul style="list-style: none; padding-left: 0; line-height: 2.5;">
+                    <li>✓ Site Master Planning</li>
+                    <li>✓ Industrial Building Architecture</li>
+                    <li>✓ Utility Planning (Electrical, Water, Waste)</li>
+                    <li>✓ Factory Act Compliance</li>
+                    <li>✓ Fire NOC Design</li>
+                    <li>✓ Green Building for Industrial</li>
+                </ul>
+            </div>
+            <div>
+                <h2>The Delivery Process</h2>
+                <ol style="line-height: 2; padding-left: 1.5rem; color: var(--text-muted);">
+                    <li>Site Assessment</li>
+                    <li>Production Workflow Study</li>
+                    <li>Master Plan</li>
+                    <li>Architecture Design</li>
+                    <li>Statutory Approvals</li>
+                    <li>Tender & Procurement</li>
+                    <li>Construction Management</li>
+                    <li>Handover</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-light">
+        <div class="container text-center fade-in">
+            <h2>Client Confidence</h2>
+            <p style="max-width: 600px; margin: 0 auto 3rem; font-style: italic; font-size: 1.25rem;">"Worksphere's
+                grasp of scale and timelines is unmatched. They handled the approvals and the complex engineering with
+                total ownership."</p>
+            <h4>— Project Head, Leading Manufacturing Corp</h4>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container fade-in">
+            <h2>Industrial Insights</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h4>Navigating Fire NOCs in Maharashtra</h4>
+                    <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9rem;">A guide to streamlining
+                        compliance for new plants.</p>
+                </div>
+                <div class="card">
+                    <h4>SEZ Master Planning</h4>
+                    <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9rem;">Optimizing plot usage and
+                        logistics flow.</p>
+                </div>
+                <div class="card">
+                    <h4>Green Factories</h4>
+                    <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9rem;">Cost-effective sustainable
+                        strategies for large-scale facilities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section bg-dark text-center">
+        <div class="container fade-in" style="max-width: 600px; margin: 0 auto;">
+            <h2 style="margin-bottom: 1rem;">Start Your Plant Design</h2>
+            <p style="margin-bottom: 2rem;">Talk to our industrial architecture specialists.</p>
+            <form style="display: flex; flex-direction: column; gap: 1rem; text-align: left;">
+                <input type="text" placeholder="Company Name"
+                    style="padding: 1rem; border-radius: 4px; border: none; width: 100%;">
+                <select style="padding: 1rem; border-radius: 4px; border: none; width: 100%;">
+                    <option>Industry Type (Auto / FMCG / Chemical / Other)</option>
+                </select>
+                <select style="padding: 1rem; border-radius: 4px; border: none; width: 100%;">
+                    <option>Project Type (New Plant / Expansion / Relocation)</option>
+                </select>
+                <input type="text" placeholder="Plot Area (sq ft / acres)"
+                    style="padding: 1rem; border-radius: 4px; border: none; width: 100%;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <input type="text" placeholder="City/State"
+                        style="padding: 1rem; border-radius: 4px; border: none; width: 100%;">
+                    <input type="text" placeholder="Timeline"
+                        style="padding: 1rem; border-radius: 4px; border: none; width: 100%;">
+                </div>
+                <button type="button" class="btn"
+                    style="width: 100%; border: none; font-size: 1.1rem; margin-top: 1rem;">Request
+                    Consultation</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            Worksphere Industrial is part of Worksphere Architects — 23 years of specialist design.
+            <a href="../index.html">See all sectors &rarr;</a>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worksphere Labs | Specialist Lab Architecture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared-header.css">
+    <style>
+        :root {
+            --primary: #0a2540;
+            --accent: #0070f3;
+            --bg-light: #f8f9fa;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* General Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 6rem 0;
+        }
+
+        .bg-light {
+            background-color: var(--bg-light);
+        }
+
+        .bg-dark {
+            background-color: var(--primary);
+            color: #fff;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            min-height: 90vh;
+            padding: 6rem 0;
+            display: flex;
+            align-items: center;
+            background: url('https://placehold.co/1920x1080/0a2540/ffffff?text=+') center/cover;
+            color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 37, 64, 0.7);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        /* Cards & Interactions */
+        .card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-dark {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        /* Images */
+        .img-fluid {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .img-cover {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #005bb5;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 0;
+            border-top: 1px solid #eaeaea;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Typography specifics */
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            letter-spacing: -0.5px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(0, 112, 243, 0.1);
+            color: var(--accent);
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="glass-header-container">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="../index.html" class="nav-btn logo-btn">Worksphere</a></li>
+                <li class="nav-separator">|</li>
+                <li><a href="../labs/index.html" class="nav-btn">Labs</a></li>
+                <li><a href="../industrial/index.html" class="nav-btn">Industrial</a></li>
+                <li><a href="../corporate/index.html" class="nav-btn">Corporate</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 01. Labs Hero -->
+    <section class="hero">
+        <div class="container hero-content fade-in">
+            <span class="pill" style="background: rgba(255,255,255,0.2); color: white;">Worksphere Labs</span>
+            <h1>Designing laboratories that pass your first audit</h1>
+            <p>India's specialist in GMP-compliant lab architecture. Over 50+ pharma projects and 2M+ sq ft delivered.
+            </p>
+            <a href="#contact" class="btn">Consult our Lab Experts</a>
+        </div>
+    </section>
+
+    <!-- 02. Why Worksphere for Labs -->
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center fade-in">Why Worksphere for Labs</h2>
+            <div class="grid-4 fade-in">
+                <div class="card">
+                    <h3>Built-in GMP</h3>
+                    <p>Compliance is integrated into the core architecture, not retrofitted later.</p>
+                </div>
+                <div class="card">
+                    <h3>Flow Expertise</h3>
+                    <p>Precise mapping of material flow vs personnel flow to prevent cross-contamination.</p>
+                </div>
+                <div class="card">
+                    <h3>Future-Proofed</h3>
+                    <p>Structural and MEP design that accommodates future heavy equipment and upgrades.</p>
+                </div>
+                <div class="card">
+                    <h3>Regulatory Mastery</h3>
+                    <p>Deep knowledge of WHO, SCHEDULE-M, and USFDA facility standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 03. Architecture vs Interiors split -->
+    <section class="section bg-light">
+        <div class="container grid-2 fade-in">
+            <div>
+                <h2>Lab Building Architecture</h2>
+                <p>Complete base building solutions including site master planning, structural design for high load
+                    requirements, and comprehensive MEP/utility planning specifically for pharmaceutical campuses.</p>
+            </div>
+            <div>
+                <img src="https://placehold.co/600x400/e2e8f0/6b7280?text=Lab+Architecture" alt="Lab Architecture"
+                    class="img-fluid">
+            </div>
+        </div>
+        <div class="container grid-2 fade-in" style="margin-top: 4rem;">
+            <div>
+                <img src="https://placehold.co/600x400/e2e8f0/6b7280?text=Lab+Interiors" alt="Lab Interiors"
+                    class="img-fluid">
+            </div>
+            <div>
+                <h2>Lab Interiors & Fit-out</h2>
+                <p>Specialized interior development covering ISO-grade cleanrooms, robust lab benching, airlock system
+                    design, chemical-resistant flooring, and sterile ceilings.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04. Lab Projects Gallery -->
+    <section class="section">
+        <div class="container fade-in">
+            <h2 class="text-center">Specialist Lab Portfolio</h2>
+            <div class="grid-3" style="margin-top: 2rem;">
+                <div class="card" style="padding:0; overflow:hidden;">
+                    <img src="https://placehold.co/400x300/e2e8f0/6b7280?text=Cleanroom+Project" class="img-cover">
+                    <div style="padding: 1.5rem;">
+                        <h3>Biotech Cleanroom</h3>
+                        <p class="text-muted">Pune, Maharashtra</p>
+                    </div>
+                </div>
+                <div class="card" style="padding:0; overflow:hidden;">
+                    <img src="https://placehold.co/400x300/e2e8f0/6b7280?text=R%26D+Lab" class="img-cover">
+                    <div style="padding: 1.5rem;">
+                        <h3>Pharma R&D Center</h3>
+                        <p class="text-muted">Hyderabad, Telangana</p>
+                    </div>
+                </div>
+                <div class="card" style="padding:0; overflow:hidden;">
+                    <img src="https://placehold.co/400x300/e2e8f0/6b7280?text=Quality+Control" class="img-cover">
+                    <div style="padding: 1.5rem;">
+                        <h3>QC Testing Facility</h3>
+                        <p class="text-muted">Mumbai, Maharashtra</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 05. Lab Case Studies -->
+    <section class="section bg-dark">
+        <div class="container fade-in">
+            <h2>Detailed Case Studies</h2>
+            <div class="grid-2">
+                <div class="card-dark">
+                    <span class="pill">USFDA Compliant</span>
+                    <h3>Global Pharma Corp Expansion</h3>
+                    <p><strong>The Brief:</strong> 120,000 sq ft R&D lab requiring USFDA approval.<br>
+                        <strong>The Challenge:</strong> Integrating complex HVAC segregation in an existing
+                        footprint.<br>
+                        <strong>The Outcome:</strong> Zero critical observations during audit.
+                    </p>
+                </div>
+                <div class="card-dark">
+                    <span class="pill">WHO GMP</span>
+                    <h3>BioSolutions Pilot Plant</h3>
+                    <p><strong>The Brief:</strong> 45,000 sq ft pilot plant for vaccine development.<br>
+                        <strong>The Challenge:</strong> Strict unidirectional flow requirements for material
+                        transfer.<br>
+                        <strong>The Outcome:</strong> Seamless operations launched 2 months ahead of schedule.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 06. Our Lab Services & 07. Process -->
+    <section class="section">
+        <div class="container grid-2 fade-in">
+            <div>
+                <h2>Our Technical Services</h2>
+                <ul style="list-style: none; padding-left: 0; line-height: 2.5;">
+                    <li>✓ GMP Lab Planning</li>
+                    <li>✓ Cleanroom Design</li>
+                    <li>✓ Airlock & Pressure Zone Planning</li>
+                    <li>✓ Utility & Services Design</li>
+                    <li>✓ Schedule M Compliance</li>
+                    <li>✓ Specialist Fit-out</li>
+                </ul>
+            </div>
+            <div>
+                <h2>The Design Process</h2>
+                <ol style="line-height: 2; padding-left: 1.5rem; color: var(--text-muted);">
+                    <li>Discovery & Compliance Audit</li>
+                    <li>Conceptual Design</li>
+                    <li>Regulatory Review</li>
+                    <li>Detailed Design</li>
+                    <li>Contractor Briefing</li>
+                    <li>Construction Supervision</li>
+                    <li>Commissioning Support</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- 08. Lab Client Reviews -->
+    <section class="section bg-light">
+        <div class="container text-center fade-in">
+            <h2>Client Confidence</h2>
+            <p style="max-width: 600px; margin: 0 auto 3rem; font-style: italic; font-size: 1.25rem;">"Worksphere
+                understood our GMP requirements immediately. Their architecture isn't just about buildings; it's about
+                engineering a compliant environment."</p>
+            <h4>— Director of Operations, Top 10 Indian Pharma</h4>
+        </div>
+    </section>
+
+    <!-- 09. Lab Insights Blog -->
+    <section class="section">
+        <div class="container fade-in">
+            <h2>Lab Design Insights</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h4>Navigating Schedule M Updates in 2026</h4>
+                    <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9rem;">What facility managers need to
+                        know about the latest regulatory shifts.</p>
+                </div>
+                <div class="card">
+                    <h4>Airlock Design Best Practices</h4>
+                    <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9rem;">Maintaining pressure cascades
+                        in high-traffic lab environments.</p>
+                </div>
+                <div class="card">
+                    <h4>Future-Proofing R&D Spaces</h4>
+                    <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9rem;">Designing modular labs that
+                        adapt to changing scientific equipment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Lab Consultation CTA -->
+    <section id="contact" class="section bg-dark text-center">
+        <div class="container fade-in" style="max-width: 600px; margin: 0 auto;">
+            <h2 style="margin-bottom: 1rem;">Discuss Your Lab Project</h2>
+            <p style="margin-bottom: 2rem;">Connect directly with our specialist lab architecture team.</p>
+            <form style="display: flex; flex-direction: column; gap: 1rem; text-align: left;">
+                <input type="text" placeholder="Company Name"
+                    style="padding: 1rem; border-radius: 4px; border: none; width: 100%;">
+                <select style="padding: 1rem; border-radius: 4px; border: none; width: 100%;">
+                    <option>Project Type (New / Expansion / Relocation)</option>
+                </select>
+                <select style="padding: 1rem; border-radius: 4px; border: none; width: 100%;">
+                    <option>Standard Required (WHO / USFDA / EU GMP)</option>
+                </select>
+                <input type="text" placeholder="City"
+                    style="padding: 1rem; border-radius: 4px; border: none; width: 100%;">
+                <button type="button" class="btn"
+                    style="width: 100%; border: none; font-size: 1.1rem; margin-top: 1rem;">Request
+                    Consultation</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 11. Parent Brand Footer -->
+    <footer>
+        <div class="container">
+            Worksphere Labs is part of Worksphere Architects — 23 years of specialist design.
+            <a href="../index.html">See all sectors &rarr;</a>
+        </div>
+    </footer>
+
+    <script>
+        // Simple Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>

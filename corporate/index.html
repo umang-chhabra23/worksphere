@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worksphere Corporate | Premium Workspace Architecture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../shared-header.css">
+    <style>
+        :root {
+            --primary: #051024;
+            --accent: #c4a052;
+            /* Gold/Champagne accent */
+            --bg-light: #fafafa;
+            --text-main: #111;
+            --text-muted: #666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 6rem 0;
+        }
+
+        .bg-light {
+            background-color: var(--bg-light);
+        }
+
+        .bg-dark {
+            background-color: var(--primary);
+            color: #fff;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero {
+            position: relative;
+            min-height: 95vh;
+            padding: 6rem 0;
+            display: flex;
+            align-items: center;
+            background: url('https://placehold.co/1920x1080/051024/ffffff?text=+') center/cover;
+            color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(5, 16, 36, 0.9) 0%, rgba(5, 16, 36, 0.4) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1.5px;
+            font-weight: 300;
+        }
+
+        .hero h1 strong {
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            color: #ccc;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 2rem;
+        }
+
+        .stat-item h4 {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-item p {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #aaa;
+            margin: 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .card {
+            background: #fff;
+            padding: 3rem 2rem;
+            border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            transition: transform 0.4s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-bottom-color: var(--accent);
+        }
+
+        .card-dark {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 3rem 2rem;
+            border-radius: 2px;
+        }
+
+        .img-fluid {
+            width: 100%;
+            height: auto;
+            border-radius: 2px;
+        }
+
+        .img-cover {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 2px 2px 0 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1.25rem 2.5rem;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+        }
+
+        .btn:hover {
+            background: #a88842;
+        }
+
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid #eaeaea;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        h2 {
+            font-size: 2.75rem;
+            margin-bottom: 3rem;
+            letter-spacing: -1px;
+            font-weight: 300;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="glass-header-container">
+        <nav>
+            <ul class="nav-links">
+                <li><a href="../index.html" class="nav-btn logo-btn">Worksphere</a></li>
+                <li class="nav-separator">|</li>
+                <li><a href="../labs/index.html" class="nav-btn">Labs</a></li>
+                <li><a href="../industrial/index.html" class="nav-btn">Industrial</a></li>
+                <li><a href="../corporate/index.html" class="nav-btn">Corporate</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content fade-in">
+            <span class="pill">Worksphere Corporate</span>
+            <h1>Offices that make people <strong>want to come back</strong> to work.</h1>
+            <p>Designing high-performance workspaces for India's leading enterprises.</p>
+            <a href="#contact" class="btn">Schedule a Workplace Audit</a>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <h4>2M+</h4>
+                    <p>Sq Ft Delivered</p>
+                </div>
+                <div class="stat-item">
+                    <h4>99%</h4>
+                    <p>Repeat Client Rate</p>
+                </div>
+                <div class="stat-item">
+                    <h4>SBI, L&T</h4>
+                    <p>Trusted By Leaders</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center fade-in">Why Worksphere for Corporate</h2>
+            <div class="grid-4 fade-in">
+                <div class="card">
+                    <h3>Proven Track Record</h3>
+                    <p class="text-muted">Trusted by SBI, L&T, Standard Chartered, and more with a 99% repeat client
+                        rate.</p>
+                </div>
+                <div class="card">
+                    <h3>Culture as Design</h3>
+                    <p class="text-muted">We use spatial design as a tool to drive productivity, collaboration, and
+                        company culture.</p>
+                </div>
+                <div class="card">
+                    <h3>Turnkey Delivery</h3>
+                    <p class="text-muted">Seamless execution from concept to handover with absolute accountability.</p>
+                </div>
+                <div class="card">
+                    <h3>Budget Integrity</h3>
+                    <p class="text-muted">A history of zero budget overruns. We engineer to value without compromising
+                        aesthetics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-light">
+        <div class="container grid-2 fade-in">
+            <div>
+                <h2>Office Building Architecture</h2>
+                <p>Base building design, core & shell development, and services planning for standalone corporate
+                    headquarters and IT campuses.</p>
+            </div>
+            <div>
+                <img src="https://placehold.co/600x400/e0e0e0/555?text=Corporate+Campus" class="img-fluid">
+            </div>
+        </div>
+        <div class="container grid-2 fade-in" style="margin-top: 5rem;">
+            <div>
+                <img src="https://placehold.co/600x400/e0e0e0/555?text=Office+Interior+Fitout" class="img-fluid">
+            </div>
+            <div>
+                <h2>Office Interior Fit-out</h2>
+                <p>Premium space planning, bespoke joinery, ergonomic furniture selection, intelligent lighting, and
+                    seamless brand integration into the physical environment.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container fade-in">
+            <h2 class="text-center">Corporate Portfolio</h2>
+            <div class="grid-3" style="margin-top: 3rem;">
+                <div class="card" style="padding:0; overflow:hidden;">
+                    <img src="https://placehold.co/400x300/e0e0e0/555?text=HQ+Redesign" class="img-cover">
+                    <div style="padding: 2rem;">
+                        <h3>Financial HQ Redesign</h3>
+                        <p class="text-muted">BKC, Mumbai</p>
+                    </div>
+                </div>
+                <div class="card" style="padding:0; overflow:hidden;">
+                    <img src="https://placehold.co/400x300/e0e0e0/555?text=Tech+Campus" class="img-cover">
+                    <div style="padding: 2rem;">
+                        <h3>Technology Campus</h3>
+                        <p class="text-muted">Hinjewadi, Pune</p>
+                    </div>
+                </div>
+                <div class="card" style="padding:0; overflow:hidden;">
+                    <img src="https://placehold.co/400x300/e0e0e0/555?text=Executive+Suite" class="img-cover">
+                    <div style="padding: 2rem;">
+                        <h3>Executive Suites</h3>
+                        <p class="text-muted">Nariman Point, Mumbai</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-dark">
+        <div class="container fade-in">
+            <h2 style="color: #fff;">Signature Case Studies</h2>
+            <div class="grid-2">
+                <div class="card-dark">
+                    <span class="pill" style="border-color: rgba(255,255,255,0.3); color: #fff;">Banking /
+                        Finance</span>
+                    <h3 style="color: #fff;">SBI Caps Headquarters</h3>
+                    <p style="color: #ccc;"><strong>Scale:</strong> 36,000 sq ft • BKC Mumbai<br>
+                        <strong>The Brief:</strong> Modernizing a legacy financial institution's workspace.<br>
+                        <strong>The Outcome:</strong> A sophisticated, secure environment that balances open
+                        collaboration with extreme acoustic privacy for sensitive operations.
+                    </p>
+                </div>
+                <div class="card-dark">
+                    <span class="pill" style="border-color: rgba(255,255,255,0.3); color: #fff;">Technology</span>
+                    <h3 style="color: #fff;">Zensar Campus</h3>
+                    <p style="color: #ccc;"><strong>Scale:</strong> 80,000 sq ft • Pune<br>
+                        <strong>The Brief:</strong> Creating an agile workspace to attract top tech talent.<br>
+                        <strong>The Outcome:</strong> Dynamic neighborhood layouts with extensive biophilia and
+                        integrated tech solutions, boosting employee attendance by 40%.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container grid-2 fade-in">
+            <div>
+                <h2>Premium Services</h2>
+                <ul
+                    style="list-style: none; padding-left: 0; line-height: 2.5; font-size: 1.1rem; color: var(--text-muted);">
+                    <li><strong style="color:var(--text-main)">—</strong> Space Planning & Programming</li>
+                    <li><strong style="color:var(--text-main)">—</strong> Office Interior Design</li>
+                    <li><strong style="color:var(--text-main)">—</strong> Furniture & Joinery Strategy</li>
+                    <li><strong style="color:var(--text-main)">—</strong> Workplace Technology Integration</li>
+                    <li><strong style="color:var(--text-main)">—</strong> Brand Environment Design</li>
+                    <li><strong style="color:var(--text-main)">—</strong> Turnkey Project Delivery</li>
+                </ul>
+            </div>
+            <div>
+                <h2>The Execution Path</h2>
+                <div style="border-left: 1px solid #eaeaea; padding-left: 2rem; margin-left: 1rem;">
+                    <p style="margin-bottom: 1rem;"><strong>1. Brief & Workplace Study</strong></p>
+                    <p style="margin-bottom: 1rem;"><strong>2. Concept Design</strong></p>
+                    <p style="margin-bottom: 1rem;"><strong>3. Design Development</strong></p>
+                    <p style="margin-bottom: 1rem;"><strong>4. Client Sign-off</strong></p>
+                    <p style="margin-bottom: 1rem;"><strong>5. Contractor Tender</strong></p>
+                    <p style="margin-bottom: 1rem;"><strong>6. Construction & Snagging</strong></p>
+                    <p style="margin-bottom: 1rem;"><strong>7. Post-occupancy Review</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-light">
+        <div class="container text-center fade-in">
+            <h2>Executive Endorsements</h2>
+            <div class="grid-3" style="text-align: left; margin-top: 3rem;">
+                <div style="padding: 2rem; background: #fff; border-radius: 2px;">
+                    <p style="font-style: italic; margin-bottom: 1.5rem; color: var(--text-muted);">"Their approach to
+                        corporate design goes beyond aesthetics. They understand how space dictates workflow and
+                        employee well-being."</p>
+                    <h4 style="font-size: 1rem;">Col. SK Sharma</h4>
+                    <p style="font-size: 0.85rem; color: #999;">Head of Admin</p>
+                </div>
+                <div style="padding: 2rem; background: #fff; border-radius: 2px;">
+                    <p style="font-style: italic; margin-bottom: 1.5rem; color: var(--text-muted);">"Worksphere
+                        delivered a world-class facility within our strict budget parameters. The attention to detail in
+                        the joinery is exceptional."</p>
+                    <h4 style="font-size: 1rem;">Madhav Karandikar</h4>
+                    <p style="font-size: 0.85rem; color: #999;">Real Estate Director</p>
+                </div>
+                <div style="padding: 2rem; background: #fff; border-radius: 2px;">
+                    <p style="font-style: italic; margin-bottom: 1.5rem; color: var(--text-muted);">"The transition to
+                        our new headquarters was seamless. Their turnkey management took the stress entirely off our
+                        executive team."</p>
+                    <h4 style="font-size: 1rem;">Behram Karbhari</h4>
+                    <p style="font-size: 0.85rem; color: #999;">CXO</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container fade-in">
+            <h2>Workplace Insights</h2>
+            <div class="grid-3">
+                <div class="card" style="padding: 2rem;">
+                    <h4>Office Design Cost Guides</h4>
+                    <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9rem;">Budgeting for premium fit-outs
+                        in Mumbai and Pune (2025 Data).</p>
+                </div>
+                <div class="card" style="padding: 2rem;">
+                    <h4>Productivity through Design</h4>
+                    <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9rem;">How lighting and acoustic
+                        strategy impacts employee output by 15%.</p>
+                </div>
+                <div class="card" style="padding: 2rem;">
+                    <h4>The Hybrid Workplace</h4>
+                    <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.9rem;">Reconfiguring legacy floor
+                        plates for modern working styles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section bg-dark text-center">
+        <div class="container fade-in" style="max-width: 700px; margin: 0 auto;">
+            <h2 style="color: #fff; margin-bottom: 1rem;">Elevate Your Workspace</h2>
+            <p style="margin-bottom: 3rem; color: #ccc;">Connect with our corporate design directors to discuss your
+                real estate strategy.</p>
+            <form style="display: flex; flex-direction: column; gap: 1rem; text-align: left;">
+                <input type="text" placeholder="Company Name"
+                    style="padding: 1.25rem; border-radius: 2px; border: none; width: 100%; background: rgba(255,255,255,0.05); color: #fff;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <input type="text" placeholder="Current Office Sq Ft"
+                        style="padding: 1.25rem; border-radius: 2px; border: none; width: 100%; background: rgba(255,255,255,0.05); color: #fff;">
+                    <select
+                        style="padding: 1.25rem; border-radius: 2px; border: none; width: 100%; background: rgba(255,255,255,0.05); color: #fff;">
+                        <option style="color: #000;">Project Type</option>
+                        <option style="color: #000;">New Office</option>
+                        <option style="color: #000;">Redesign</option>
+                        <option style="color: #000;">Relocation / Expansion</option>
+                    </select>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <input type="text" placeholder="City"
+                        style="padding: 1.25rem; border-radius: 2px; border: none; width: 100%; background: rgba(255,255,255,0.05); color: #fff;">
+                    <input type="text" placeholder="Preferred Timeline"
+                        style="padding: 1.25rem; border-radius: 2px; border: none; width: 100%; background: rgba(255,255,255,0.05); color: #fff;">
+                </div>
+                <input type="text" placeholder="Budget Range (Optional)"
+                    style="padding: 1.25rem; border-radius: 2px; border: none; width: 100%; background: rgba(255,255,255,0.05); color: #fff;">
+
+                <button type="button" class="btn" style="width: 100%; margin-top: 1.5rem;">Request Consultation</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            Worksphere Corporate is part of Worksphere Architects — 23 years of specialist design.
+            <a href="../index.html">See all sectors &rarr;</a>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>

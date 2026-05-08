@@ -1,0 +1,101 @@
+/* Floating Black Frosted Glass Header - Shared Across All Pages */
+.glass-header-container {
+    position: fixed;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 0.5rem;
+
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+
+    /* Entry animation */
+    animation: slideDownHeader 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+}
+
+@keyframes slideDownHeader {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+.nav-links {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.85);
+    padding: 0.75rem 1.75rem;
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    line-height: normal;
+}
+
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 100px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
+}
+
+.nav-btn:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.nav-btn:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.nav-btn:active {
+    transform: scale(0.96);
+}
+
+.nav-btn.logo-btn {
+    font-weight: 600;
+    color: #fff;
+}
+
+.nav-separator {
+    color: rgba(255, 255, 255, 0.2);
+    user-select: none;
+    margin: 0 0.25rem;
+}
